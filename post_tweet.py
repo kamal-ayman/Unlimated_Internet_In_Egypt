@@ -12,8 +12,8 @@ driver.get('https://twitter.com/search?q=%23انترنت_غير_محدود_في_
 sleep(7)
 while 1:
     driver.find_element(by=By.XPATH, value="//a[@data-testid='SideNav_NewTweet_Button']").click()
-    sleep(.2)
+    sleep(.1)
     driver.find_element(by=By.XPATH, value="//div[@role='textbox']").send_keys(f"_{i} #انترنت_غير_محدود_في_مصر {i}")
     driver.find_element(by=By.XPATH, value="//div[@data-testid='tweetButton']").click()
     i += 1
-    sleep(2)
+    sleep(.5)
