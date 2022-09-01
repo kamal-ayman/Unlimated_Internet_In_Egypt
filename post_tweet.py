@@ -17,8 +17,6 @@ def Bot(user, password, hashtag):
     sleep(1)
     driver.get('https://twitter.com/search?q=%23انترنت_غير_محدود_في_مصر&src=trend_click&f=live&vertical=trends')
     sleep(3)
-    # f" \nمفيش نوم قبل المليون \n "
-    # f"انهارده الساعه 9 ان شاء الله هنشيل كلنا سلك الحراره من الروتر وترجعه تاني\n "
     i = 0
     ran = str(random.randint(1, 9999))
 
@@ -31,14 +29,6 @@ def Bot(user, password, hashtag):
                 hashtag+' \n '+str(i)+ran
                 # Keys.CONTROL + 'v'
             )
-            # f"أعملوا منشن ل إيلون ماسك \n "
-            # f"@elonmusk \n"
-            # f"#مش_هنجدد\n "
-            # f"\n #انترنت_غير_محدود_في_مصر \n"
-            # f"#Unlimated_Internet_In_Egypt \n"
-            # f"#Help_egypt_elon_musk \n"
-            # f"رقم {ran},\n "
-            # f"المرة ال{i}\n"
             sleep(.2)
             driver.find_element(by=By.XPATH, value="//div[@data-testid='tweetButton']").click()
             i += 1
@@ -71,12 +61,6 @@ def main():
     print('username: ' + user)
     print('password: ' + password)
     print('login now ...')
-    #
-    # user = ['kamalay38134599', 'kamal1596321', 'kamalay54061096', 'kamalay13618482', 'kamalay28451011', 'kamalay16017173', 'zeyad220066']
-    # password = '159632144'
-    # password = 'ziad123456###'
-
-    # i = int(input("user: "))
 
     try:
         Bot(user, password, hashtag)
