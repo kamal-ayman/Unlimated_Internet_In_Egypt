@@ -1,19 +1,91 @@
+import ctypes
+import os
+import random
 from time import sleep
 from selenium import webdriver
+from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
-driver = webdriver.Chrome()
-driver.get('https://twitter.com/login/')
 
-i = 0
-input("Login first and press enter!!")
-driver.get('https://twitter.com/search?q=%23انترنت_غير_محدود_في_مصر&src=trend_click&f=live&vertical=trends')
+def Bot(user, password, hashtag):
+    driver = webdriver.Chrome()
+    driver.get('https://twitter.com/login/')
+    sleep(3)
+    driver.find_element(by=By.XPATH, value="//input[@autocomplete='username']").send_keys(user + Keys.ENTER)
+    sleep(1)
+    driver.find_element(by=By.XPATH, value="//input[@autocomplete='current-password']").send_keys(password + Keys.ENTER)
+    sleep(1)
+    driver.get('https://twitter.com/search?q=%23انترنت_غير_محدود_في_مصر&src=trend_click&f=live&vertical=trends')
+    sleep(3)
+    # f" \nمفيش نوم قبل المليون \n "
+    # f"انهارده الساعه 9 ان شاء الله هنشيل كلنا سلك الحراره من الروتر وترجعه تاني\n "
+    i = 0
+    ran = str(random.randint(1, 9999))
 
-sleep(7)
-while 1:
-    driver.find_element(by=By.XPATH, value="//a[@data-testid='SideNav_NewTweet_Button']").click()
-    sleep(.1)
-    driver.find_element(by=By.XPATH, value="//div[@role='textbox']").send_keys(f"_{i} #انترنت_غير_محدود_في_مصر {i}\n #Unlimated_Internet_In_Egypt {i}")
-    driver.find_element(by=By.XPATH, value="//div[@data-testid='tweetButton']").click()
-    i += 1
-    sleep(.5)
+    while 1:
+        try:
+            print(i)
+            driver.find_element(by=By.XPATH, value="//a[@data-testid='SideNav_NewTweet_Button']").click()
+            sleep(.5)
+            driver.find_element(by=By.XPATH, value="//div[@role='textbox']").send_keys(
+                hashtag+' \n '+str(i)+ran
+                # Keys.CONTROL + 'v'
+            )
+            # f"أعملوا منشن ل إيلون ماسك \n "
+            # f"@elonmusk \n"
+            # f"#مش_هنجدد\n "
+            # f"\n #انترنت_غير_محدود_في_مصر \n"
+            # f"#Unlimated_Internet_In_Egypt \n"
+            # f"#Help_egypt_elon_musk \n"
+            # f"رقم {ran},\n "
+            # f"المرة ال{i}\n"
+            sleep(.2)
+            driver.find_element(by=By.XPATH, value="//div[@data-testid='tweetButton']").click()
+            i += 1
+            sleep(.5)
+        except:
+            ran = str(random.randrange(1, 9999))
+            continue
+
+
+def main():
+    try:
+        hashtag = open('hashtag.txt', 'r', encoding='utf-8').read()
+    except:
+        hashtag = open('hashtag.txt', 'w+')
+        ctypes.windll.user32.MessageBoxW(0, 'new file \'hashtag.txt\' created please add your text...', "Warning")
+        return
+    if hashtag == '':
+        ctypes.windll.user32.MessageBoxW(0, "please Enter something in hashtag file!", "Warning")
+        return
+
+    try:
+        acc = open('account.txt', 'r').read()
+        user = acc.split(':')[0]
+        password = acc.split(':')[1]
+    except:
+        user = input('Enter user name: ')
+        password = input('Enter password: ')
+        open('account.txt', 'w+').write(user + ':' + password)
+
+    print('username: ' + user)
+    print('password: ' + password)
+    print('login now ...')
+    #
+    # user = ['kamalay38134599', 'kamal1596321', 'kamalay54061096', 'kamalay13618482', 'kamalay28451011', 'kamalay16017173', 'zeyad220066']
+    # password = '159632144'
+    # password = 'ziad123456###'
+
+    # i = int(input("user: "))
+
+    try:
+        Bot(user, password, hashtag)
+    except:
+        ctypes.windll.user32.MessageBoxW(0, "please install Google Chrome", "Error")
+
+
+if __name__ == '__main__':
+    if os.path.isfile('chromedriver.exe'):
+        main()
+    else:
+        ctypes.windll.user32.MessageBoxW(0, "Where is the googledriver.exe?\ni can\'t see it ! ", "Error")
